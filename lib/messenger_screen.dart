@@ -84,7 +84,10 @@ class MessengerScreen extends StatelessWidget {
                 height: 130,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => BuildOnlineItem(),
+                  itemBuilder: (context, index) {
+                    if (index == 0) return BuildVideoItem();
+                    return BuildOnlineItem();
+                  },
                   separatorBuilder: (context, index) => SizedBox(
                     width: 25,
                   ),
@@ -214,5 +217,37 @@ class MessengerScreen extends StatelessWidget {
             ),
           ),
         ],
+      );
+  Widget BuildVideoItem() => Container(
+        width: 70,
+        child: Column(
+          children: [
+            Stack(
+              alignment: AlignmentDirectional.bottomEnd,
+              children: const [
+                CircleAvatar(
+                  radius: 35,
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.video_call_rounded,
+                    color: Colors.black,
+                    size: 40,
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Create Room',
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       );
 }
