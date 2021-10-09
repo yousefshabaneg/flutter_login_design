@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 class MessengerScreen extends StatelessWidget {
-  const MessengerScreen({Key? key}) : super(key: key);
-
+  List<UserModel> users = [...UserModel.users()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,12 +85,12 @@ class MessengerScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     if (index == 0) return BuildVideoItem();
-                    return BuildOnlineItem();
+                    return BuildUserItem(users[index - 1]);
                   },
                   separatorBuilder: (context, index) => SizedBox(
                     width: 25,
                   ),
-                  itemCount: 8,
+                  itemCount: users.length,
                 ),
               ),
               SizedBox(
@@ -100,11 +99,12 @@ class MessengerScreen extends StatelessWidget {
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => BuildChatItem(),
+                itemBuilder: (context, index) =>
+                    BuildUserChatItem(users[index]),
                 separatorBuilder: (context, index) => SizedBox(
                   height: 20,
                 ),
-                itemCount: 15,
+                itemCount: users.length,
               )
             ],
           ),
@@ -250,4 +250,126 @@ class MessengerScreen extends StatelessWidget {
           ],
         ),
       );
+  Widget BuildUserChatItem(UserModel user) => Row(
+        children: [
+          CircleAvatar(
+            radius: 35,
+            backgroundImage: NetworkImage(user.image),
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  user.name,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Neque porro quisquam est qui dolorem est qui dolorem',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Container(
+                        width: 7,
+                        height: 7,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                    Text('2.00 pm'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+  Widget BuildUserItem(UserModel user) => Container(
+        width: 70,
+        child: Column(
+          children: [
+            Stack(
+              alignment: AlignmentDirectional.bottomEnd,
+              children: [
+                CircleAvatar(
+                  radius: 35,
+                  backgroundImage: NetworkImage(user.image),
+                ),
+                const Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    bottom: 3,
+                    end: 3,
+                  ),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 8.5,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    bottom: 3,
+                    end: 3,
+                  ),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.green,
+                    radius: 7,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              user.name,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
+class UserModel {
+  final String name;
+  final String image;
+
+  UserModel({required this.name, required this.image});
+
+  static List<UserModel> users() {
+    return [
+      UserModel(name: 'Yousef Shaban', image: 'https://picsum.photos/500/500'),
+      UserModel(
+          name: 'Yousef Elboghdady', image: 'https://picsum.photos/400/400'),
+      UserModel(name: 'Ahmed Marwan', image: 'https://picsum.photos/600/500'),
+      UserModel(name: 'Mahmoud Hafiz', image: 'https://picsum.photos/500/600'),
+      UserModel(name: 'Reda Mahmoud', image: 'https://picsum.photos/400/600'),
+      UserModel(
+          name: 'Mohamed Abdullah', image: 'https://picsum.photos/600/400'),
+      UserModel(name: 'Eslam Adel', image: 'https://picsum.photos/600/600'),
+    ];
+  }
 }
