@@ -308,7 +308,7 @@ class _BmiScreenState extends State<BmiScreen> {
                 padding: const EdgeInsets.all(8),
                 child: MaterialButton(
                   onPressed: () {
-                    var result = weight / (pow(height / 100, 2));
+                    var result = weight / (pow(height.round() / 100, 2));
                     Navigator.push(
                       context,
                       MaterialPageRoute(
