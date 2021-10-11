@@ -1,7 +1,8 @@
-import 'package:first_flutter_app/bmi_screen.dart';
-import 'package:first_flutter_app/messenger_screen.dart';
+import 'package:first_flutter_app/modules/bmi/bmi_screen.dart';
+import 'package:first_flutter_app/modules/messenger/messenger_screen.dart';
+import 'package:first_flutter_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:first_flutter_app/login_screen.dart';
+import 'package:first_flutter_app/modules/login/login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: BmiScreen(),
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: primary,
+        primarySwatch: primaryCustome,
+      ),
     );
   }
 }

@@ -1,10 +1,7 @@
+import 'package:first_flutter_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 class BMIResultScreen extends StatelessWidget {
-  var primary = Color(0xff0A0E1D);
-  var secondary = Color(0xff151d3b);
-  var redAccent = Color(0xffff0059);
-
   final double result;
   BMIResultScreen({required this.result});
 
@@ -13,7 +10,6 @@ class BMIResultScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI Result'),
-        backgroundColor: primary,
       ),
       body: Container(
         color: secondary,
