@@ -1,6 +1,8 @@
 import 'dart:math';
 
-import 'package:first_flutter_app/bmi_result_screen.dart';
+import 'package:first_flutter_app/modules/bmi_result/bmi_result_screen.dart';
+import 'package:first_flutter_app/shared/components/components.dart';
+import 'package:first_flutter_app/shared/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +14,6 @@ class BmiScreen extends StatefulWidget {
 }
 
 class _BmiScreenState extends State<BmiScreen> {
-  var primary = Color(0xff0A0E1D);
-  var secondary = Color(0xff151d3b);
-  var red = Color(0xffD5004A);
-  var dark = Color(0xFF8D8E98);
   var height = 120.0;
   var weight = 60;
   var age = 18;
@@ -25,11 +23,9 @@ class _BmiScreenState extends State<BmiScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
-        backgroundColor: primary,
         centerTitle: true,
       ),
       body: Container(
-        color: primary,
         child: Column(
           children: [
             Expanded(
@@ -301,33 +297,18 @@ class _BmiScreenState extends State<BmiScreen> {
                 ),
               ),
             ), //3rd Row
-            Container(
-              color: red,
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: MaterialButton(
-                  onPressed: () {
-                    var result = weight / (pow(height.round() / 100, 2));
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BMIResultScreen(result: result),
-                      ),
-                    );
-                  },
-                  height: 50,
-                  child: Text(
-                    'CALCULATE',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
+            defaultButton(
+              text: 'Calculate',
+              onPressed: () {
+                var result = weight / (pow(height.round() / 100, 2));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BMIResultScreen(result: result),
                   ),
-                ),
-              ),
-            ) //Button
+                );
+              },
+            ), //Button
           ],
         ),
       ),
