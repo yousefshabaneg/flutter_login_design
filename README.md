@@ -1,6 +1,6 @@
-# Messenger Design.
+# BMI Calculator.
 
 
 <p align="center">
-  <img src="https://i.ibb.co/PrQgSd4/screenshot-messenger.png" width="300" title="hover text">
+  <img src="https://i.ibb.co/82Sxgj5/screenshot.png" width="300" title="hover text">
 </p>
